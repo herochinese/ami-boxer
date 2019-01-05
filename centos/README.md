@@ -6,7 +6,7 @@ It's first try to use Packer build AMI, which focused on CentOS 7. Packer is pow
 
 1. Install Packer [here][e4cf82c3].
 2. Install VirtualBox [here][480dd043].
-3. (Option) Download http://mirror.vodien.com/centos/7.6.1810/isos/x86_64/CentOS-7-x86_64-DVD-1810.iso into local disk and modify "iso_file", or replace "iso_file" to that link in centos7_template.json. 
+3. (Option) Download http://mirror.vodien.com/centos/7.6.1810/isos/x86_64/CentOS-7-x86_64-DVD-1810.iso into local disk and modify "iso_file", or replace "iso_file" to that link in centos7_template.json.
 
   [e4cf82c3]: https://www.packer.io/intro/getting-started/install.html "here"
   [480dd043]: https://www.virtualbox.org/ "here"
@@ -34,6 +34,7 @@ aws iam put-role-policy --role-name vmimport --policy-name vmimport --policy-doc
 
 ## Build OVA & AMI
 ```
+#Be patient!!! > 20 minutes
 packer build centos7_template.json
 ```
 
