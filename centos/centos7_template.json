@@ -1,0 +1,42 @@
+{
+  "variables": {
+    "iso_file": "file:///Users/chuancc/Downloads/CentOS-7-x86_64-DVD-1810.iso",
+    "iso_checksum": "6d44331cc4f6c506c7bbe9feb8468fad6c51a88ca1393ca6b8b486ea04bec3c1",
+    "type": "sha256",
+    "non_gui": "true",
+    "access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "region": "{{env `AWS_DEFAULT_REGION`}}",
+    "s3_bucket_name": "{{env `S3_BUCKET_NAME`}}"
+  },
+  "builders": [{
+    "type": "virtualbox-iso",
+    "iso_url": "{{user `iso_file`}}",
+    "iso_checksum": "{{user `iso_checksum`}}",
+    "iso_checksum_type": "{{user `type`}}",
+    "headless": "",
+    "output_directory": "builds",
+    "vm_name": "Minimal-CentOS7",
+    "guest_os_type": "RedHat_64",
+    "disk_size": "81920",
+    "boot_wait": "5s",
+    "http_directory": "http",
+    "boot_command": ["<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"],
+    "ssh_username": "vagrant",
+    "ssh_password": "vagrant",
+    "ssh_wait_timeout": "1000s",
+    "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
+    "format": "ova"
+  }],
+  "post-processors": [{
+    "type": "amazon-import",
+    "access_key": "{{user `access_key`}}",
+    "secret_key": "{{user `secret_key`}}",
+    "region": "{{user `region`}}",
+    "s3_bucket_name": "{{user `s3_bucket_name`}}",
+    "license_type": "BYOL",
+    "tags": {
+      "Description": "packer amazon import "
+    }
+  }]
+}
