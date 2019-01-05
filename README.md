@@ -5,7 +5,9 @@ Packer brings pre-baked images into the modern age, unlocking untapped potential
 
 # Done
 
-1. CentOS
+1. CentOS ->[[7.6.1810][3f17620d]]
+
+  [3f17620d]: https://github.com/herochinese/ami-boxer/tree/master/centos "7.6.1810"
 
 
 # To-Do
